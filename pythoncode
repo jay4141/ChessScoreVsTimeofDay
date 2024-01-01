@@ -1,0 +1,82 @@
+import requests as requests
+import json as json
+import csv
+from datetime import datetime
+
+
+parameters = {
+    "since": 1672444800000,
+    "pgnInJson": True,
+    "moves": False,
+    "tags": False,
+}
+
+
+#This function takes the epoch time (in ms) and returns the day and part of the day it belongs to
+
+
+def epoch_to_time_of_day(epoch):
+    epoch_time = int(str(epoch)[:-3])
+    date_time = datetime.fromtimestamp(epoch_time)
+    month = date_time.month
+    day = date_time.day
+    hr = date_time.hour
+
+    if hr in range(13, 18):
+        time_of_day_str = 'morning'
+    elif hr in range(18, 23):
+        time_of_day_str = 'afternoon'
+    elif hr in range(3, 13):
+        time_of_day_str = 'night'
+    else:
+        time_of_day_str = 'evening'
+
+    return month, day, time_of_day_str
+
+
+game_list = []
+
+
+#Retrieving the data from lichess
+
+response = requests.get('https://lichess.org/api/games/user/HuxleyBurgess', params=parameters,
+                        headers={"Accept": "application/x-ndjson"})
+
+
+#Transforming the data into what I want
+
+for item in response.iter_lines():
+    single_game_json = item.decode()
+    single_game_dict_full = json.loads(single_game_json)
+
+    if single_game_dict_full['players']['white']['user']['name'] == 'HuxleyBurgess':
+        single_game_dict_full['colour'] = "white"
+    else:
+        single_game_dict_full['colour'] = "black"
+
+    if 'winner' in single_game_dict_full:
+        if single_game_dict_full['winner'] == single_game_dict_full['colour']:
+            single_game_dict_full['result'] = 1
+        else:
+            single_game_dict_full['result'] = 0
+    else:
+        single_game_dict_full['result'] = 0.5
+
+    single_game_dict_full['month'] = epoch_to_time_of_day(single_game_dict_full['createdAt'])[0]
+    single_game_dict_full['day'] = epoch_to_time_of_day(single_game_dict_full['createdAt'])[1]
+    single_game_dict_full['time'] = epoch_to_time_of_day(single_game_dict_full['createdAt'])[2]
+
+    single_game_dict = dict((k, single_game_dict_full[k]) for k in ('id', 'speed', 'month', 'day', 'time', 'colour', 'result'))
+
+    game_list.append(single_game_dict)
+
+
+
+#Turning the data into a csv file
+with open('chessdata.csv', 'w', encoding='utf8', newline='') as output_file:
+    fc = csv.DictWriter(output_file,
+                        fieldnames=game_list[0].keys(),
+
+                       )
+    fc.writeheader()
+    fc.writerows(game_list)
