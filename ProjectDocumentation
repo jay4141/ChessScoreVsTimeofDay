@@ -1,31 +1,27 @@
 Chess Score vs Time of Day:
 
-How does my energy level affect my chess? Chess is a game that requires a lot of thinking and speed, so I hypothesized that my chess abilities will decrease as the day progressed. In order to measure my chess
-abilities, I used average chess score, which is defined as (number of wins+0.5*number of draws)/(number of games). Average chess score is always between 0 and 1. The number of games you win is proportional to your 
-score.
+How does the time of day I play affect my chess skills? Chess relies on speed and thinking ability, which decline as the day progresses. Therefore, I hypothesize that my chess abilities will decrease as the day goes on. 
 
-To give some needed background on chess, there are many different types of chess based on what time control you play at. In this project, 'bullet chess' refers to chess where each player has excatly 1 minute to
-play all their moves. 'Blitz chess' is chess where each player has 3 minutes and a 2-second increment per move. In bullet chess, it's pretty much all about how fast you are at making moves and also getting out of 
-the opening stage without a serious disadvantage. Blitz chess has more thinking, but speed is still a significant component. Bullet chess is extremely addictive; it's a lot of fun when you checkmate someone within
-a minute of starting the game! I pretty much only played bullet and blitz games this year (and much more bullet than blitz), so that's what I focused on.
+I'm going to use average chess score to measure the effect of time of day I play on my chess skills. Average chess score is defined as 
+(number of wins + 0.5*(number of draws))/(number of games). Average chess score is always between 0 and 1, and is proportional to the number of games you win. However, average chess score is not on its own a measure of how good you are at chess. On online chess sites like Lichess and Chess.com, players are matched with others who have similar ratings, i.e. ratings are 'normalized'. Low-rated players will play against other low-rated players, and high-rated players play against other high-rated players. Thus the best chess player in the world can go on a bad streak and have a score of 2/10 in a tournament competing against other amazing players, while the worst can go on a run and have a score of 10/10 in a tournament playing against other poor players. Because of this, average chess score is more of a measure of how well you are playing in a certain subset of games vs how well you play on average, which is excactly what I want for the study!
 
-First, I separated the day to morning (7-12), afternoon (12-17), evening (17-21), and night (21-7). Next, I needed to figure out how I could get data on my chess games. I play chess (mostly) on Lichess, 
-which has excellent open data including result and when the game was played, which was exactly what I needed. Since the data is entered by computer, I had to do very little cleaning (yay!). 
+To give some needed background on chess, there are many different types of chess based on time controls. In this project, 'bullet chess' refers to chess where each player has exactly 1 minute to play all their moves. 'Blitz chess' is chess where each player has 3 minutes and a 2-second increment per move. In bullet chess, it's pretty much all about how fast you are at making moves and also getting out of the opening stage without a serious disadvantage. Blitz chess has more thinking, but speed is still a significant component. Bullet chess is extremely addictive; it's a lot of fun when you checkmate someone within a minute of starting the game! I pretty much only played bullet and blitz games this year (and much more bullet than blitz), so that's what I focused on.
 
-Second, I got rid of unnecessary data and created the attributes that I needed: game id (unique to the game), speed (bullet or blitz), month, day, time (morning, afternoon...), colour (white or black), and result
-(1 for win, 0.5 for draw, 0 for lose). You can find all this on my python code document.
+First, I'll separate the day to morning (7-12), afternoon (12-17), evening (17-21), and night (21-7). Next, I need to figure out how to get data on my chess games. I play mostly on Lichess, and see that I can get exactly the data I need! Lichess tracks the game result, the time of day it was played, who played what colour, the time control, and much more. Since this data is entered by computer, I will have to do very little cleaning (yay!). 
 
-Third, I uploaded the data to Tableau to create visualizations to test my hypothesis. You can find the finished product here: https://public.tableau.com/app/profile/jared.gobin/viz/AverageChessScorevsTimeofDay/ChessScorevsTimeofDay?publish=yes 
-I created a bar chart that plots average chess score vs time of day, a line chart that plots average score vs month to see how 
-my score changed over time, and a pie chart to compare number of games played in each month.
+Second, I'll use an API to retrieve game id (unique to the game), speed (bullet or blitz), month, day, time (morning, afternoon...), colour (white or black), and result (1 for win, 0.5 for draw, 0 for lose). You can find all this on my python code document.
 
-The bar chart confirmed my hypothesis: I played well in the morning, decent in the afternoon, poor in the evening, but slightly better at nightimmediately popped out is that I did the best in February, and worst 
-in August. In February, I got hearing damage and tinnitus. I was not sleeping very much, so I figured I would have a terrible result. August's result was expected, as I was finishing up my master's thesis and my
-mind was pre-occupied. I played the most games in October, when I was still trying to figure out what I wanted to do with my life now that I no longer wanted to go into academia. 
+Third, I'll upload the data to Tableau to create visualizations to test my hypothesis. You can find the finished product here: https://public.tableau.com/app/profile/jared.gobin/viz/AverageChessScorevsTimeofDay/ChessScorevsTimeofDay?publish=yes 
+To see how the time of day affects chess score, I'll create a bar chart for easy comparison. I'm also interested to see how my scores change over time, so I'll create a line chart that plots average score vs month. Lastly, it'll be interesting to see which how the number of games played changed per month, so I'll create a pie chart to compare percentages. 
 
-Probably my favourite insight from this graphic is that I play well at night as black! There are really just two months dragging the average down; I played very well in the other months! (To see this, click on
-'night' and 'black' options. When playing as black, you are usually defending and counter-punching, rather than being the aggressor. And at night, I figured my intuitions for those counter-punches would be poorer!
+Fourth, it'll be interesting to compare blitz vs bullet scores, % played per month, and how I did playing as each colour. I create filters to do these comparisons, and immediately notice that I did not play enough blitz games in months other than December to create a decent visualization for this filter. This introduces some bias into my analysis, as December will dominate my blitz results.
+
+Fifth, I create a dashboard and start my analysis. The bar chart confirms my hypothesis: I play well in the morning, decent in the afternoon, poor in the evening, but slightly better at night. A couple things that immediately pop out is that I did the best in February and the worst in August. In February, I got hearing damage and tinnitus. I was not sleeping very much, so I figured I would have a terrible result. August's result was expected, as I was finishing up my master's thesis and my mind was pre-occupied (click on 'night' to see a really poor average for August!). From the pie chart I see that I played the most games in October. This was when I was still trying to figure out what I wanted to do with my life, since I no longer wanted to go into academia. 
+
+My favourite insight from this graphic is that I play well at night as black! There are really just two months dragging the average down; I played very well in the other months! (To see this, click on 'night' and 'black' options.) When playing as black, you are usually defending and counter-punching, rather than being the aggressor. And at night, I figured my intuitions for those counter-punches would be poorer!
+
+I see that I play best as white in the morning, which is to be expected. Playing at my highest energy level while being the aggressor suits me well in chess.
 
 In conclusion: my chess level decreases as the day goes on, but there are some interesting exceptions to the rule, such as when I am playing as black at night.
 
-Limitations: this is just 1 year's data, and I did not play nearly as much blitz as I'd like to. My new year's resolution is to play greater time formats more frequently and to redo this analysis in a year. 
+Limitations: this is just 2023's data, and I did not play nearly as much blitz as I'd like to. My new year's resolution is to play longer time formats more often and to redo this analysis in a year!
