@@ -1,7 +1,7 @@
-import requests as requests
-import json as json
-import csv
-from datetime import datetime
+import requests
+import json 
+import csv 
+import datetime
 
 
 parameters = {
@@ -17,7 +17,7 @@ parameters = {
 
 def epoch_to_time_of_day(epoch):
     epoch_time = int(str(epoch)[:-3])
-    date_time = datetime.fromtimestamp(epoch_time)
+    date_time = datetime.datetime.fromtimestamp(epoch_time)
     month = date_time.month
     day = date_time.day
     hr = date_time.hour
