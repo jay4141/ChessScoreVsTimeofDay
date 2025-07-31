@@ -18,9 +18,9 @@ Fourth, it'll be interesting to compare blitz vs bullet scores, % played per mon
 
 Fifth, I create a dashboard and start my analysis. The bar chart promotes my hypothesis: I play well in the morning, decent in the afternoon, poor in the evening, but slightly better at night. A couple things that immediately pop out is that I did the best in February and the worst in August. In February, I got hearing damage and tinnitus. I was not sleeping very much, so I figured I would have a terrible result. August's result was expected, as I was finishing up my master's thesis and my mind was pre-occupied (click on 'night' to see a really poor average for August!). From the pie chart I see that I played the most games in October. This was when I was still trying to figure out what I wanted to do with my life, since I no longer wanted to go into academia. Thus my time was spent more on processing how I felt about options, rather than doing actual work. Interestingly enough, my total chess results for the year are 2056 wins, 2056 losses, and 64 draws...meaning I finished the year with a 0.5 chess score! I had the EXACT same number of wins as losses!
 
-My favourite insight from this graphic is that I play well at night as black! There are really just two months dragging the average down; I played very well in the other months! (To see this, click on 'night' and 'black' options.) When playing as black, you are usually defending and counter-punching, rather than being the aggressor. And at night, I figured my intuitions for those counter-punches would be poorer!
+My favourite insight from this graphic is that I play well at night as black! There are really just two months dragging the average down; I played very well in the other months! (To see this, click on 'night' and 'black' options.) When playing as black, you are usually defending and counter-punching, rather than being on offense. And at night, I figured my intuitions for those counter-punches would be poorer!
 
-I see that I play best as white in the morning, which is to be expected. Playing chess at my highest energy level while being the aggressor suits me.
+I see that I play best as white in the morning, which is to be expected. 
 
 Statistical analysis: Now that I have played around with my dashboard and found some insights, it's time to rigorously answer whether or not the time of day affects my average chess score. After all, although I believe the time of day does affect my chess skills, there is only an absolute difference of 0.04792 from my highest avg score to my lowest. To put this into perspective, if I play 100 hundred games during the morning, I can expect to win 5 more times than I would if I played 100 games in the evening. 
 
@@ -30,4 +30,4 @@ Now for the test: H_0: time of day does not affect chess score. H_a: time of day
 
 In conclusion: my chess level decreases as the day goes on, but there are some interesting exceptions to the rule, such as when I am playing as black at night.
 
-Limitations: this is just 2023's data, and I did not play nearly as much blitz as I'd like to. My new year's resolution is to play longer time formats more often and to redo this analysis in a year!
+Limitations: this is just 2023's data, and I did not play nearly as much blitz as I'd like to. My new year's resolution is to play longer time formats!
